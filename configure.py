@@ -1,9 +1,14 @@
-savemodel = "models/SanWen.pkl"
-loadmodel = "models/SanWen.pkl-233"
-savedset = "models/SanWen.pkl.dset"
+#savemodel = "models/SanWen.pkl"
+#loadmodel = "models/SanWen.pkl-233"
+#savedset = "models/SanWen.pkl.dset"
+
+savemodel = "models/FinRE.pkl"
+loadmodel = "models/FinRE.pkl-233"
+savedset = "models/FinRE.pkl.dset"
 
 public_path = "data"
-dataset = "SanWen"
+# dataset = "SanWen"
+dataset = "FinRE"
 train_file = "train.txt"
 dev_file = "valid.txt"
 test_file = "test.txt"
