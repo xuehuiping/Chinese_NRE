@@ -20,7 +20,7 @@ import configure
 sys.path.append("..")
 
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+#os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 sys.setrecursionlimit(2000000)
 import torch._utils
 try:
@@ -63,12 +63,13 @@ def evaluate(data, model, name):
     return calc_evaluation(y_ans, y_pred)
 
 def load_eval(data, model_dir, name):
-    data.HP_gpu = torch.cuda.is_available()
+    data.HP_gpu = False #torch.cuda.is_available()
     print('Load model from ', model_dir)
     model = MGLattice_model(data)    
-    model.load_state_dict(torch.load(model_dir))
-    if data.HP_gpu:
-        model = model.cuda()
+    model.load_state_dict(torch.load(model_dir, map_location='cpu'))
+    #if data.HP_gpu:
+        #model = model.cuda()
+        
 
     start_time = time.time()
     y_ans,y_pred = evaluate_forward(data, model, name)
@@ -97,7 +98,8 @@ def train(data, save_model_dir):
     model = MGLattice_model(data)
     # use GPU
     if data.HP_gpu:
-        model = model.cuda()
+        #model = model.cuda()
+        pass
 
     parameters = filter(lambda p: p.requires_grad, model.parameters())
     if configure.Optimizer == 'Adam':
